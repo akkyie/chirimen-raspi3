@@ -23,19 +23,34 @@ const fs = require('fs');
 var versionStr = fs.readFileSync('../version.txt');
 logout(versionStr);
 
-////////////////////////////////////////////////////////////
-// https server
-const https = require('https');
 const port = 33330;
+const usesHTTPS = false;
+let server;
 
-const server = https.createServer({
-  cert: fs.readFileSync('./crt/server.crt'),
-  key: fs.readFileSync('./crt/server.key')
-});
+if (usesHTTPS) {
+  ////////////////////////////////////////////////////////////
+  // https server
+  const https = require('https');
 
-server.listen(port,()=> {
-  logout("https server started.");
-});
+  server = https.createServer({
+    cert: fs.readFileSync('./crt/server.crt'),
+    key: fs.readFileSync('./crt/server.key')
+  });
+
+  server.listen(port,()=> {
+    logout("https server started.");
+  });
+} else {
+  ////////////////////////////////////////////////////////////
+  // http server
+  const http = require('http');
+
+  server = http.createServer(() => {});
+
+  server.listen(port,()=> {
+    logout("http server started.");
+  })
+}
 
 ////////////////////////////////////////////////////////////
 // WebSocket server
