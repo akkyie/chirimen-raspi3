@@ -2,8 +2,7 @@
 
 (function(){
 
-var serverURL = "wss://localhost:33330/";
-
+var serverURL = "ws://192.168.0.0:33330/";
 
 function infoLog(str){
 // console.log("info: "+str);
