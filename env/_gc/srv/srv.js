@@ -45,7 +45,7 @@ if (usesHTTPS) {
   // http server
   const http = require('http');
 
-  server = http.createServer(() => {});
+  server = http.createServer();
 
   server.listen(port,()=> {
     logout("http server started.");
